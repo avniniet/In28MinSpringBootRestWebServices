@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.learning.rest.websrvices.exception.UserNotFoundException;
 import com.learning.rest.websrvices.helloWorld.HelloWorldBean;
 
 @RestController
@@ -50,9 +51,13 @@ public class UserController {
 	@RequestMapping(method=RequestMethod.GET, path="/getUserById/{id}")
 	public User getUserById(@PathVariable int id) {
 
+     
+		User user=userDaoService.findById(id);
+		if(user==null) {
+			throw new UserNotFoundException("User Id="+id);
+		}
 
-
-		return userDaoService.findById(id);
+		return user;
 	}
 
 

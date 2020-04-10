@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloWorldController implements ErrorController {
+public class HelloWorldController /* implements ErrorController */ {
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/helloWorld")
 	public String helloWorld() {
@@ -24,12 +24,15 @@ public class HelloWorldController implements ErrorController {
 	}
 	
 	
-	@RequestMapping("/error")
-	public String handleError(HttpServletResponse response,HttpServletRequest request) {
-		
-		return response.getStatus()+"-"+"Error occurred during opening"+request.getRequestURI();
-		
-	}
+	/*
+	 * @RequestMapping("/error") public String handleError(HttpServletResponse
+	 * response,HttpServletRequest request) {
+	 * 
+	 * return response.getStatus()+"-"+"Error occurred during opening"+request.
+	 * getRequestURI();
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping(method=RequestMethod.GET ,path = "/helloWorld/PathVariable/{name}")
 	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
@@ -37,10 +40,10 @@ public class HelloWorldController implements ErrorController {
 	}
 
 
-	@Override
-	public String getErrorPath() {
-		
-		return "/error";
-	}
+	/*
+	 * @Override public String getErrorPath() {
+	 * 
+	 * return "/error"; }
+	 */
 
 }
