@@ -2,10 +2,18 @@ package com.learning.rest.websrvices.user;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class User {
 	
 	private Integer id;
+	
+	
+	@Size(min = 1, message = "Name should contain atleast one character")
 	private String name;
+	
+	@Past(message = "Date should not be future date")
 	private Date dob;
 	public Integer getId() {
 		return id;
