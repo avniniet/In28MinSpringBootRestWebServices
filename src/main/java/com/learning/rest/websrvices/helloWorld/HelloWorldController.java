@@ -1,16 +1,21 @@
 package com.learning.rest.websrvices.helloWorld;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController /* implements ErrorController */ {
+	
+	@Autowired
+	private MessageSource messageSource;
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/helloWorld")
 	public String helloWorld() {
@@ -46,4 +51,12 @@ public class HelloWorldController /* implements ErrorController */ {
 	 * return "/error"; }
 	 */
 
+	@RequestMapping(method=RequestMethod.GET, path = "/helloWorldI18n")
+	public String helloWorldInternationalize(/*
+												 * @RequestHeader(value = "Accept-Language" , required = false) Locale
+												 * locale
+												 */) {
+		
+		return messageSource.getMessage("good.morning.message", null,LocaleContextHolder.getLocale());
+	}
 }

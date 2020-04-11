@@ -37,7 +37,6 @@ public class UserController {
 	}
 
 
-
 	@RequestMapping(method=RequestMethod.POST, path="/createUser")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 
